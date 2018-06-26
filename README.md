@@ -1,6 +1,8 @@
 # tool_chartest
 Program to help test appearance of characters in fonts on the screen and in reports
 
+![ScreenShot](https://user-images.githubusercontent.com/13615993/41892277-9452b3aa-796b-11e8-85f7-98208e8d4a37.png)
+
 Type the character into the character field, or enter the integer or hex equivalanet into the fields immediately below.  These 3 fields are kept in sync, that is if you type character into field, the integer and hex numbers change, if you type a value into integer, value in character and hex will change, and finally if you type a value into hex, value in character and integer will change.
 
 Select a font from the COMBOBOX's or override by typing a font into the override font fields.  The appearance of the field in the GUI will change to reflect the selected font, or you can generate a SVG of PDF report
