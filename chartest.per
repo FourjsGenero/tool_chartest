@@ -1,0 +1,71 @@
+LAYOUT (TEXT="Character Test")
+VBOX
+GROUP (TEXT="Character")
+GRID
+{
+    Character  [c       ] 
+    Integer    [i       ]
+    Hex        [h       ]
+}
+END
+END
+GROUP (TEXT="Font")
+GRID
+{
+              ["Select font" |"Override font"]
+Font-Client   [fil           |fi             |cfi   ]
+Font-Server   [fsl           |fs             |b02   ]
+FontPDF-Server[fpl           |fp             |b03   ]                          
+
+}
+END
+END
+GROUP (TEXT="Environment")
+GRID
+{
+LANG                    [l01           ]
+FGL_LENGTH_SEMANTICS    [l02           ]
+feinfo-userPreferredLang[l03           ]
+}
+END
+END
+GROUP (TEXT="Launch Environment")
+GRID
+{
+LANG                    [le01           ]
+FGL_LENGTH_SEMANTICS    [le02           ]
+FGLSERVER               [le03           ]
+[b01                                    ]
+}
+END
+END
+END
+END
+ATTRIBUTES
+EDIT c = formonly.c;
+EDIT i = formonly.i TYPE INTEGER;
+EDIT h = formonly.h;
+
+EDIT fi = formonly.fontinfo_client;
+EDIT fs = formonly.fontinfo_server;
+EDIT fp = formonly.fontinfopdf_server;
+COMBOBOX fil = formonly.fontinfo_client_list, INITIALIZER=combo_populate_fontinfo_client;
+COMBOBOX fsl = formonly.fontinfo_server_list, INITIALIZER=combo_populate_fontinfo_server;
+COMBOBOX fpl = formonly.fontinfopdf_server_list, INITIALIZER=combo_populate_fontinfopdf_server;
+
+EDIT cfi = formonly.charfontinfo, NOENTRY, STYLE="bigger";
+
+
+
+
+LABEL l01 = formonly.lang;
+LABEL l02 = formonly.fgl_length_semantics;
+LABEL l03 = formonly.feinfo_userpreferredlang;
+
+EDIT le01 = formonly.launch_lang;
+EDIT le02 = formonly.launch_fgl_length_semantics;
+EDIT le03 = formonly.launch_fglserver;
+BUTTON b01: launch, TEXT="Launch With Above Environment";
+
+BUTTON b02: report_svg, TEXT="SVG Report";
+BUTTON b03: report_pdf, TEXT="PDF Report";

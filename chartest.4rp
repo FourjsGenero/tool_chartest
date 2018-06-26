@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report:Report xmlns:rtl="http://www.4js.com/2004/RTL" xmlns:report="http://www.4js.com/2007/REPORT" xmlns="http://www.4js.com/2004/PXML" gstVersion="30a07" version="6.00">
+    <report:Settings RWPageWidth="a4width" RWPageLength="a4length" RWLeftMargin="1.3cm" RWTopMargin="1.3cm" RWRightMargin="1.3cm" RWBottomMargin="1.3cm">
+        <report:FormatList>
+            <report:Format-SVG/>
+            <report:Format-PDF/>
+            <report:Format-image/>
+        </report:FormatList>
+    </report:Settings>
+    <report:Data RWDataLocation="chartest.rdd" RWFglReportName="chartest_rpt"/>
+    <report:Conflicts/>
+    <rtl:stylesheet>
+        <PXML>
+            <rtl:match name="Report" nameConstraint="Report" minOccurs="1" maxOccurs="1">
+                <MINIPAGE name="Page Root" width="max" length="max">
+                    <rtl:match name="OnEveryRow" nameConstraint="OnEveryRow" minOccurs="0" maxOccurs="unbounded">
+                        <LAYOUTNODE name="LayoutNode" x="0" y="0" width="min" length="min" anchorX="0" anchorY="0" floatingBehavior="enclosed">
+                            <rtl:input-variable name="x.lang" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDBOX name="WordBox" width="max" floatingBehavior="enclosed" text="{{&quot;Value for LANG=&quot;+x.lang}}"/>
+                            <rtl:input-variable name="x.fgl_length_semantics" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDBOX name="WordBox1" width="max" floatingBehavior="enclosed" text="{{&quot;Value for FGL_LENGTH_SEMANTICS=&quot;+x.fgl_length_semantics}}"/>
+                            <rtl:input-variable name="x.fontname" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDBOX name="WordBox2" width="max" floatingBehavior="enclosed" text="{{&quot;Value for font is &quot;+x.fontname}}"/>
+                            <rtl:input-variable name="x.fontname" type="FGLString" expectedLocation="expectedHere"/>
+                            <rtl:input-variable name="x.chr" type="FGLString" expectedLocation="expectedHere"/>
+                            <WORDBOX name="WordBox3" bgColor="#ffff0a" fontName="{{x.fontname.trim()}}" fontSize="{{60}}" floatingBehavior="enclosed" text="{{x.chr.trim()}}" borderStyle="solid"/>
+                        </LAYOUTNODE>
+                    </rtl:match>
+                </MINIPAGE>
+            </rtl:match>
+        </PXML>
+    </rtl:stylesheet>
+</report:Report>

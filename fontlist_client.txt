@@ -1,0 +1,15 @@
+# A list of fonts available on the GUI client
+# TODO - find suitable command to generate list from client O/S
+Arial
+Courier
+Dialog
+Helvetica
+MingLiu
+Monospaced
+SansSerif
+Serif
+SimSun
+Symbol
+Times
+Webdings
+Zapf Dingbats
