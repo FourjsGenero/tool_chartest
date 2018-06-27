@@ -59,6 +59,13 @@ DEFINE grw om.SaxDocumentHandler
             LET c = ASCII(i)
             DISPLAY c TO charfontinfo
             DISPLAY c TO c
+
+        ON ACTION fileformat
+            CALL ui.Interface.frontCall("standard","launchUrl",SFMT("http://www.fileformat.info/info/unicode/char/%1/index.htm", h),[])
+        ON ACTION compart
+            CALL ui.Interface.frontCall("standard","launchUrl",SFMT("https://www.compart.com/en/unicode/U+%1", IIF(h.getLength()=2,SFMT("00%1",h),h)),[])
+        ON ACTION unicode
+            CALL ui.Interface.frontCall("standard","launchUrl",SFMT("http://unicode.org/cldr/utility/character.jsp?a=%1", h),[])
             
         ON ACTION launch -- Launch same program but with different environment
             IF launch_lang IS NOT NULL THEN
