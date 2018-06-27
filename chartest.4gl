@@ -70,7 +70,8 @@ DEFINE grw om.SaxDocumentHandler
              IF launch_fglserver IS NOT NULL THEN
                 CALL FGL_SETENV("FGL_SERVER", launch_fglserver)
             END IF
-            RUN "fglrun tool_chartest.42r" WITHOUT WAITING
+            -- Launch program again with updated environment
+            RUN SFMT("fglrun %1", base.Application.getProgramName()) WITHOUT WAITING
             
         ON CHANGE fontinfo_client -- change style used for field
             CALL ui.Window.getCurrent().getForm().setFieldStyle("charfontinfo",SFMT("%1 %2","bigger",nvl(fontinfo_client, fontinfo_client_list)))
