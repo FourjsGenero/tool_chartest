@@ -75,7 +75,7 @@ DEFINE grw om.SaxDocumentHandler
                 CALL FGL_SETENV("FGL_LENGTH_SEMANTICS", launch_fgl_length_semantics)
             END IF
              IF launch_fglserver IS NOT NULL THEN
-                CALL FGL_SETENV("FGL_SERVER", launch_fglserver)
+                CALL FGL_SETENV("FGLSERVER", launch_fglserver)
             END IF
             -- Launch program again with updated environment
             RUN SFMT("fglrun %1", base.Application.getProgramName()) WITHOUT WAITING
@@ -130,13 +130,22 @@ DEFINE style, style_attribute xml.DomNode
 
 DEFINE ch base.Channel
 DEFINE line STRING
+DEFINE i INTEGER
 
     LET ch = base.Channel.create()
     CALL ch.openFile("fontlist_client.txt","r")
 
     LET doc = xml.DomDocument.Create()
-    CALL doc.load(SFMT("%1%2lib%2default.4st", FGL_GETENV("FGLDIR"),os.Path.separator()))
-
+    
+    TRY
+        CALL doc.load(SFMT("%1%2lib%2default.4st", FGL_GETENV("FGLDIR"),os.Path.separator()))
+    CATCH
+        DISPLAY SFMT("Unable to load %1%2lib%2default.4st with errors",FGL_GETENV("FGLDIR"),os.Path.separator())
+        FOR i = 1 TO doc.getErrorsCount()
+            DISPLAY doc.getErrorDescription(i)
+        END FOR
+        EXIT PROGRAM 1
+    END TRY
     LET root = doc.getDocumentElement()
     
     LET style = root.appendChildElement("Style")
