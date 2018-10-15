@@ -3,16 +3,17 @@ VBOX
 GROUP (TEXT="Character")
 GRID
 {
-    Character  [c       ] 
-    Integer    [i       ]
-    Hex        [h       ][lk01  |lk02  |lk03  ]
+    Character  [c                   ] 
+    Integer    [i                   ]
+    Hex        [h                   ]
+               [lk01  |lk02  |lk03  ]
 }
 END
 END
 GROUP (TEXT="Font")
 GRID
 {
-              ["Select font" |"Override font"]
+              ["System font" |"Override font"]
 Font-Client   [fil           |fi             |cfi   ]
 Font-Server   [fsl           |fs             |b02   ]
 FontPDF-Server[fpl           |fp             |b03   ]                          
@@ -25,33 +26,37 @@ GRID
 {
 LANG                    [l01           ]
 FGL_LENGTH_SEMANTICS    [l02           ]
-feinfo-userPreferredLang[l03           ]
+fglrun -i mbcs          [l03           ]
+                        [              ]
+                        [              ]
+                        [              ]
+feinfo-userPreferredLang[l04           ]
 }
 END
 END
 GROUP (TEXT="Launch Environment")
 GRID
 {
-LANG                    [le01           ]
-FGL_LENGTH_SEMANTICS    [le02           ]
-FGLSERVER               [le03           ]
-[b01                                    ]
+LANG                    [le01                     ]
+FGL_LENGTH_SEMANTICS    [le02                     ]
+FGLSERVER               [le03                     ]
+[b01                                              ]
 }
 END
 END
 END
 END
 ATTRIBUTES
-EDIT c = formonly.c;
-EDIT i = formonly.i TYPE INTEGER;
-EDIT h = formonly.h;
+EDIT c = formonly.c, PLACEHOLDER="Enter character", COMMENT="Enter characters to examine";
+EDIT i = formonly.i TYPE INTEGER, PLACEHOLDER="Enter integer value", COMMENT="Enter integer value of character to examine", JUSTIFY=LEFT;
+EDIT h = formonly.h, PLACEHOLDER="Enter Hex value", COMMENT="Enter Hex value of character to examine";
 
-EDIT fi = formonly.fontinfo_client;
-EDIT fs = formonly.fontinfo_server;
-EDIT fp = formonly.fontinfopdf_server;
-COMBOBOX fil = formonly.fontinfo_client_list, INITIALIZER=combo_populate_fontinfo_client;
-COMBOBOX fsl = formonly.fontinfo_server_list, INITIALIZER=combo_populate_fontinfo_server;
-COMBOBOX fpl = formonly.fontinfopdf_server_list, INITIALIZER=combo_populate_fontinfopdf_server;
+EDIT fi = formonly.fontinfo_client, PLACEHOLDER="Enter font manually", COMMENT="Manually enter font to override with on client";
+EDIT fs = formonly.fontinfo_server, PLACEHOLDER="Enter font manually", COMMENT="Manually enter font to override with on server";
+EDIT fp = formonly.fontinfopdf_server, PLACEHOLDER="Enter font manually", COMMENT="Manually enter font to override with on server for PDF";
+COMBOBOX fil = formonly.fontinfo_client_list, INITIALIZER=combo_populate_fontinfo_client, PLACEHOLDER="Select a font", COMMENT="Select a font to use on client";
+COMBOBOX fsl = formonly.fontinfo_server_list, INITIALIZER=combo_populate_fontinfo_server, PLACEHOLDER="Select a font", COMMENT="Select a font to use on server";
+COMBOBOX fpl = formonly.fontinfopdf_server_list, INITIALIZER=combo_populate_fontinfopdf_server, PLACEHOLDER="Select a font", COMMENT="Select a font to use on server for PDF";
 
 EDIT cfi = formonly.charfontinfo, NOENTRY, STYLE="bigger";
 
@@ -60,11 +65,12 @@ EDIT cfi = formonly.charfontinfo, NOENTRY, STYLE="bigger";
 
 LABEL l01 = formonly.lang;
 LABEL l02 = formonly.fgl_length_semantics;
-LABEL l03 = formonly.feinfo_userpreferredlang;
+LABEL l03 = formonly.fglrunimbcs;
+LABEL l04 = formonly.feinfo_userpreferredlang;
 
-EDIT le01 = formonly.launch_lang;
-EDIT le02 = formonly.launch_fgl_length_semantics;
-EDIT le03 = formonly.launch_fglserver;
+EDIT le01 = formonly.launch_lang, PLACEHOLDER="Enter value to launch with", COMMENT="Enter value to set LANG to when launching new environment";
+EDIT le02 = formonly.launch_fgl_length_semantics, PLACEHOLDER="Enter value to launch with", COMMENT="Enter value to set FGL_LENGTH_SEMANTICS to when launching new environment";
+EDIT le03 = formonly.launch_fglserver, PLACEHOLDER="Enter value to launch with", COMMENT="Enter value to set FGLSERVER to when launching new environment";
 BUTTON b01: launch, TEXT="Launch With Above Environment";
 
 BUTTON b02: report_svg, TEXT="SVG Report";

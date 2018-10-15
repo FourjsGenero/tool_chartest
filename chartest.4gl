@@ -20,6 +20,8 @@ DEFINE fontinfo_client_list, fontinfo_server_list, fontinfopdf_server_list STRIN
 
 DEFINE x reportType
 DEFINE grw om.SaxDocumentHandler
+DEFINE mbcs_t TEXT
+DEFINE temp_filename STRING
 
     OPTIONS FIELD ORDER FORM
     OPTIONS INPUT WRAP
@@ -34,6 +36,17 @@ DEFINE grw om.SaxDocumentHandler
 
     DISPLAY FGL_GETENV("LANG") TO lang
     DISPLAY FGL_GETENV("FGL_LENGTH_SEMANTICS") TO fgl_length_semantics
+
+    # read fglrun -i mbcs
+    LET temp_filename = os.Path.makeTempName()
+    LOCATE mbcs_t IN FILE temp_filename
+    RUN SFMT("fglrun -i mbcs 2> %1", temp_filename)
+    DISPLAY mbcs_t TO fglrunimbcs;
+    IF NOT os.Path.delete(temp_filename) THEN
+        #ignore error if deleting
+    END IF
+    FREE mbcs_t
+    
     CALL ui.Interface.frontCall("standard","feinfo",["userPreferredlang"],[feinfo_userpreferredlang])
     DISPLAY BY NAME feinfo_userpreferredlang
     LET c = "A"
