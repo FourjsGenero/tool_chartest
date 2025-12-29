@@ -1,0 +1,6 @@
+*.42?
+*.4pw?*
+*.4pdb
+chartest.4st
+chartest.rdd
+?debug?.xml
